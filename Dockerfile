@@ -43,7 +43,9 @@ RUN apt-get install php-pear \
     && apt-get install php8.2-dev -y \
     && apt-get install unixodbc-dev -y \
     && pecl install sqlsrv \
-    && sed -i '/extension=odbc/a\extension=sqlsrv.so' /etc/php/8.2/cli/php.ini
+    && pecl install pdo_sqlsrv \
+    && sed -i '/extension=odbc/a\extension=sqlsrv.so' /etc/php/8.2/cli/php.ini \
+    && sed -i '/extension=sqlsrv.so/a\extension=pdo_sqlsrv.so' /etc/php/8.2/cli/php.ini
 
 # Settings for Apache
 RUN echo "ServerName docker_localhost" >> /etc/apache2/apache2.conf \

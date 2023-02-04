@@ -1,12 +1,9 @@
 version: '3'
 
 services:
-
-    ms.php82:
-      container_name: "ms-php82"
-      build:
-        context: .
-        dockerfile: ./Dockerfile
+    laudo.php:
+      container_name: "app-php"
+      image: gcsilva/ubuntu22.04-php8.2
       ports:
         - '${APP_PORT:-80}:80'
       volumes:
