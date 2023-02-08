@@ -1,10 +1,17 @@
 version: '3'
 
 services:
-    laudo.php:
+    laudo-php82:
       container_name: "app-php"
-      image: gcsilva/ubuntu22.04-php8.2
+      build:
+        context: ./
+        dockerfile: ./docker/Dockerfile
+        args:
+          APP_PORT: '80'
+          ODBC_DRIVER_SCRIPT: './docker/install_ODBC_Driver.sh'
+          OPENSSL_UPDATER: './docker/install_openssl.sh'
       ports:
         - '${APP_PORT:-80}:80'
+        - "1433:1433/TCP"
       volumes:
-        - '.:/var/www/html'
+        - './laudo:/var/www/html'
